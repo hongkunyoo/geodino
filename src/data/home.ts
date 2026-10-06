@@ -14,16 +14,38 @@ export interface ProcessStep extends TitledText {
   items: string[];
 }
 
+/**
+ * 메인 첫 화면: 누구를 위한 것인지(eyebrow) → 문제(제목) → 캐치프레이즈(lead) → 받는 것(note) 순서.
+ * 캐치프레이즈는 제목이 아니라 lead로 둔다 (2026-10 운영자 결정: 첫눈에 문제가 보이도록)
+ */
 export const hero = {
-  titleLines: ['AI가 한입에 이해하도록,', 'GeoDino가 요리해 드립니다.'],
-  highlight: 'GeoDino',
-  lead: '우리 비즈니스가 AI 답변에 잘 인용될 수 있도록 도와드립니다.',
-  note: '처음 3개월은 비용 없이 진행합니다.',
+  eyebrow: '변호사·세무사·학원·인테리어 사장님을 위한',
+  titleLines: ['손님이 AI에게 추천을 물을 때,', '우리 비즈니스가 나오나요?'],
+  highlight: '우리 비즈니스',
+  lead: 'AI가 한입에 이해하도록, GeoDino가 요리해 드립니다.',
+  note: '이메일만 남기면, 5개 AI에 직접 물어본 결과를 한 장으로 보내 드립니다. 진단은 무료, 정리 작업도 처음 3개월 무료입니다.',
+};
+
+/**
+ * 히어로의 "예시" AI 답변 화면. 실제 AI 답변이나 실존 업체가 아니다 (CLAUDE.md 29.5: 예시임을 분명히 표시).
+ * 업체 이름은 ○○·△△·□□로만 쓴다.
+ */
+export const heroExample = {
+  label: '예시 화면',
+  question: '분당에서 종합소득세 잘하는 세무사 추천해줘',
+  answerIntro: '분당에서 많이 언급되는 세무사무소를 정리했어요.',
+  answers: [
+    { name: '○○세무회계', note: '개인사업자 종합소득세, 기장' },
+    { name: '△△세무사무소', note: '법인 세무, 양도·상속 상담' },
+    { name: '□□택스', note: '프리랜서·1인 사업자 신고' },
+  ],
+  missing: '우리 사무소는 답변에 없어요',
+  caption: '예시: 손님이 AI에게 세무사를 물었을 때의 답변 화면 (실제 AI 답변이나 실제 업체가 아닙니다)',
 };
 
 export const problem = {
   eyebrow: '이런 적 있으신가요?',
-  title: 'AI에게 물어보면, 우리 비즈니스는 어떻게 나오나요?',
+  title: 'AI 답변 속 우리 비즈니스, 이렇게 보이고 있지 않나요?',
   lead: '손님은 이제 검색창뿐 아니라 AI에게도 추천과 비교를 묻습니다.',
   quotes: [
     'AI에게 우리 동네 잘하는 곳을 추천해 달라고 했더니, 우리는 안 나와요.',

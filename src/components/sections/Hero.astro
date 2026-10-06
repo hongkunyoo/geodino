@@ -6,20 +6,24 @@ import CtaButton from '@/components/CtaButton.astro';
 import type { BreadcrumbItem } from '@/lib/schema';
 
 export interface Props {
+  /** 제목 위 한 줄: 누구를 위한 페이지인지 */
+  eyebrow?: string;
   titleLines: string[];
   /** 제목 안에서 초록색으로 강조할 단어 */
   highlight?: string;
   lead: string;
   note?: string;
-  image: ImageMetadata;
-  imageAlt: string;
+  /** 히어로 그림. 없으면 visual 슬롯을 쓴다 (메인의 예시 AI 답변 화면) */
+  image?: ImageMetadata;
+  imageAlt?: string;
   /** 제목이 긴 페이지(업종 랜딩 등)는 compact로 글자 크기를 줄인다 */
   titleSize?: 'default' | 'compact';
   /** 하위 페이지(업종 랜딩)에서 제목 위에 보여 줄 브레드크럼 */
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const { titleLines, highlight, lead, note, image, imageAlt, titleSize = 'default', breadcrumbs } = Astro.props;
+const { eyebrow, titleLines, highlight, lead, note, image, imageAlt = '', titleSize = 'default', breadcrumbs } =
+  Astro.props;
 
 const lines = titleLines.map((line) => {
   if (!highlight || !line.includes(highlight)) return { before: line };
@@ -32,6 +36,7 @@ const lines = titleLines.map((line) => {
   <div class="container hero__inner">
     <div class="hero__text">
       {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+      {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
       <h1 id="hero-title" class:list={[titleSize === 'compact' && 'hero__title--compact']}>
         {
           lines.map((line, i) => (
@@ -45,20 +50,24 @@ const lines = titleLines.map((line) => {
         }
       </h1>
       <p class="hero__lead">{lead}</p>
-      <div class="hero__actions">
-        <CtaButton placement="hero" size="lg" />
-        {note && <p class="hero__note">{note}</p>}
-      </div>
+      <CtaButton placement="hero" size="lg" />
+      {note && <p class="hero__note">{note}</p>}
     </div>
-    <Image
-      class="hero__art"
-      src={image}
-      alt={imageAlt}
-      widths={[360, 480, 720, 1080]}
-      sizes="(min-width: 860px) 480px, min(480px, calc(100vw - 32px))"
-      loading="eager"
-      fetchpriority="high"
-    />
+    {
+      image ? (
+        <Image
+          class="hero__art"
+          src={image}
+          alt={imageAlt}
+          widths={[360, 480, 720, 1080]}
+          sizes="(min-width: 860px) 480px, min(480px, calc(100vw - 32px))"
+          loading="eager"
+          fetchpriority="high"
+        />
+      ) : (
+        <slot name="visual" />
+      )
+    }
   </div>
 </section>
 
@@ -87,20 +96,21 @@ const lines = titleLines.map((line) => {
     font-style: normal;
   }
 
+  .hero__eyebrow {
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
   .hero__lead {
     margin-block: var(--space-4) var(--space-6);
     color: var(--color-ink-muted);
     font-size: var(--text-lg);
   }
 
-  .hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-3) var(--space-4);
-  }
-
   .hero__note {
+    max-width: 30em;
+    margin-top: var(--space-3);
     color: var(--color-ink-muted);
     font-size: var(--text-sm);
   }

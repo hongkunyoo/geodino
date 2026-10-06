@@ -1,0 +1,116 @@
+---
+/**
+ * 히어로의 "예시" AI 답변 화면. 이미지가 아니라 HTML로 그려 가볍고 읽을 수 있게 한다.
+ * 실제 AI 답변·실존 업체가 아님을 라벨과 캡션으로 분명히 표시한다 (CLAUDE.md 29.5).
+ */
+import { Image } from 'astro:assets';
+import aiBot from '@/assets/characters/ai-bot.webp';
+import dinoPoint from '@/assets/characters/dino-point.webp';
+import { heroExample } from '@/data/home';
+
+const { label, question, answerIntro, answers, missing, caption } = heroExample;
+---
+
+<figure class="example">
+  <div class="example__window">
+    <span class="example__label">{label}</span>
+
+    <p class="example__question">{question}</p>
+
+    <div class="example__answer">
+      <Image class="example__bot" src={aiBot} alt="" width={40} height={40} densities={[1, 2]} loading="eager" />
+      <div>
+        <p>{answerIntro}</p>
+        <ol>
+          {
+            answers.map((item) => (
+              <li>
+                <strong>{item.name}</strong> — {item.note}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+
+    <p class="example__missing">
+      <Image class="example__dino" src={dinoPoint} alt="" width={44} height={44} densities={[1, 2]} loading="eager" />
+      {missing}
+    </p>
+  </div>
+
+  <figcaption class="sr-only">{caption}</figcaption>
+</figure>
+
+<style>
+  .example {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    justify-self: center;
+  }
+
+  .example__window {
+    position: relative;
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-6) var(--space-5) var(--space-5);
+    border: var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    font-size: var(--text-sm);
+  }
+
+  .example__label {
+    position: absolute;
+    top: -0.8em;
+    left: var(--space-5);
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.6;
+  }
+
+  .example__question {
+    justify-self: end;
+    max-width: 85%;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
+    background: var(--color-surface);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .example__answer {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: var(--space-3);
+    align-items: start;
+  }
+
+  .example__answer ol {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+    padding-left: 1.25em;
+  }
+
+  .example__missing {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border: 1px dashed var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .example__dino {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+  }
+</style>

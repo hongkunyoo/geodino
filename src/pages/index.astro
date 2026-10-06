@@ -2,6 +2,7 @@
 /**
  * 메인 페이지. 구성: CLAUDE.md 10장 (샘플/데모 섹션은 운영자 결정으로 보류)
  */
+import AiAnswerExample from '@/components/AiAnswerExample.astro';
 import Citation from '@/components/sections/Citation.astro';
 import Faq from '@/components/sections/Faq.astro';
 import FinalCta from '@/components/sections/FinalCta.astro';
@@ -10,7 +11,6 @@ import Hero from '@/components/sections/Hero.astro';
 import Industries from '@/components/sections/Industries.astro';
 import Problem from '@/components/sections/Problem.astro';
 import Process from '@/components/sections/Process.astro';
-import duoChef from '@/assets/characters/duo-chef.webp';
 import dinoMagnifier from '@/assets/characters/dino-magnifier.webp';
 import { siteConfig } from '@/config/site';
 import { mainFaq } from '@/data/faq';
@@ -26,13 +26,14 @@ import { faqSchema } from '@/lib/schema';
   schema={[faqSchema(mainFaq)]}
 >
   <Hero
+    eyebrow={hero.eyebrow}
     titleLines={hero.titleLines}
     highlight={hero.highlight}
     lead={hero.lead}
     note={hero.note}
-    image={duoChef}
-    imageAlt="초록 공룡 GeoDino가 잘게 썬 웹페이지 조각을 접시에 담아 AI 로봇에게 건네는 그림"
-  />
+  >
+    <AiAnswerExample slot="visual" />
+  </Hero>
   <Problem
     eyebrow={problem.eyebrow}
     title={problem.title}
