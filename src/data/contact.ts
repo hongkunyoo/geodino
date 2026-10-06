@@ -21,7 +21,7 @@ export const consentSummary = [
   { term: '보유 기간', detail: '문의 처리 완료 후 1년 (삭제 요청 시 즉시 파기)' },
   {
     term: '국외 이전',
-    detail: '폼 내용은 국외 알림 서비스(ntfy)를 거쳐 운영자에게 전달됩니다. 원하지 않으면 이메일로 직접 연락해 주세요.',
+    detail: '폼 내용은 미국의 알림 서비스(ntfy, Google Firebase)를 거쳐 운영자에게 전달됩니다. 이메일 문의도 Gmail(미국)로 받습니다.',
   },
   { term: '동의 거부', detail: '동의하지 않을 수 있으며, 이 경우 폼으로 신청할 수 없습니다.' },
 ];
