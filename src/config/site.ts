@@ -62,6 +62,11 @@ export const siteConfig = {
     thanksPath: '/contact/thanks/',
   },
 
+  /** 검색엔진 사이트 소유 확인 값 (공개 값). Google·GitHub은 DNS TXT로 확인해서 여기 없음 */
+  siteVerification: {
+    naver: 'cf823543698828e69097bf58ce6649772a922939',
+  },
+
   analytics: {
     /** 비어 있으면 GA 스크립트를 로드하지 않는다 */
     gaId: import.meta.env.PUBLIC_GA_ID ?? '',
