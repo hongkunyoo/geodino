@@ -1,6 +1,23 @@
 // @ts-check
+import { readdirSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+
+/**
+ * sitemap lastmod: 실제 수정일을 아는 가이드에만 넣는다 (frontmatter updatedAt).
+ * 다른 페이지에 빌드 시각을 넣으면 매 배포마다 바뀌어 검색엔진이 lastmod를 믿지 않게 된다.
+ */
+const GUIDES_DIR = new URL('./src/content/guides/', import.meta.url);
+/** @type {Record<string, string>} 가이드 경로 → updatedAt */
+const guideLastmod = Object.fromEntries(
+  readdirSync(GUIDES_DIR)
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => {
+      const updatedAt = readFileSync(new URL(file, GUIDES_DIR), 'utf8').match(/^updatedAt:\s*(\S+)/m)?.[1];
+      return [`/guides/${file.replace(/\.md$/, '')}/`, updatedAt];
+    })
+    .filter(([, updatedAt]) => updatedAt),
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,6 +39,11 @@ export default defineConfig({
     sitemap({
       // 문의 제출 후 감사 페이지는 검색 노출 대상이 아니다
       filter: (page) => !page.endsWith('/contact/thanks/'),
+      serialize(item) {
+        const updatedAt = guideLastmod[new URL(item.url).pathname];
+        if (updatedAt) item.lastmod = new Date(updatedAt).toISOString();
+        return item;
+      },
     }),
   ],
 });

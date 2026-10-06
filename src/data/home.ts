@@ -46,7 +46,7 @@ export const heroExample = {
 export const problem = {
   eyebrow: '이런 적 있으신가요?',
   title: 'AI 답변 속 우리 비즈니스, 이렇게 보이고 있지 않나요?',
-  lead: '손님은 이제 검색창뿐 아니라 AI에게도 추천과 비교를 묻습니다.',
+  lead: '손님은 이제 검색창뿐 아니라 ChatGPT, Gemini 같은 AI에게도 추천과 비교를 묻습니다.',
   quotes: [
     'AI에게 우리 동네 잘하는 곳을 추천해 달라고 했더니, 우리는 안 나와요.',
     'AI가 우리를 엉뚱하게 설명해요. 하지도 않는 업무를 한다고 하거나, 옛날 주소를 알려줘요.',

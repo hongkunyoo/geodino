@@ -1,9 +1,9 @@
 ---
 order: 2
-title: AI 검색 준비도 체크리스트
+title: AI 검색(GEO) 준비도 체크리스트
 description: 우리 비즈니스가 AI 검색에서 잘 소개될 준비가 되어 있는지 스스로 점검할 수 있는 체크리스트입니다. 찾기 쉬움, 답으로 쓰기 좋음, 믿을 수 있음 세 가지 기준으로 정리했습니다.
 publishedAt: 2026-10-06
-updatedAt: 2026-10-06
+updatedAt: 2026-10-07
 faqs:
   - question: 몇 개 이상 체크되면 괜찮은 건가요?
     answer:

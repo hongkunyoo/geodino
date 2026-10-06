@@ -12,6 +12,8 @@ export interface NavItem {
 
 export const siteConfig = {
   name: 'GeoDino',
+  /** 한글 이름. 이름이 비슷한 해외 서비스(GeoDin)와 구분되도록 구조화 데이터·푸터·llms.txt에 함께 쓴다 */
+  nameKo: '지오디노',
   url: 'https://geodino.io',
   lang: 'ko',
   locale: 'ko_KR',

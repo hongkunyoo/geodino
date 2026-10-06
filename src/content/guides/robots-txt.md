@@ -3,7 +3,7 @@ order: 3
 title: AI가 우리 정보를 가져갈 수 있을까? robots.txt 쉽게 이해하기
 description: AI 서비스가 우리 웹페이지를 읽어 갈 수 있는지는 robots.txt라는 안내문에 달려 있습니다. robots.txt가 무엇인지, 왜 많은 플랫폼이 AI를 막는지, 우리 비즈니스는 무엇을 확인하고 어떻게 설정하면 좋은지 정리했습니다.
 publishedAt: 2026-10-06
-updatedAt: 2026-10-06
+updatedAt: 2026-10-07
 faqs:
   - question: robots.txt를 바꾸면 바로 AI 답변에 반영되나요?
     answer:
@@ -117,4 +117,14 @@ Allow: /
 
 플랫폼의 설정은 우리가 바꿀 수 없습니다. 그래서 플랫폼 채널은 그대로 운영하면서, 우리가 직접 관리하고 AI에게 열어 둔 공식 안내 페이지를 하나 두는 것이 현실적인 방법입니다. 이 페이지에 전문 분야, 지역, 비용 기준, 진행 절차를 정리하고, 운영 중인 플랫폼 채널을 함께 연결해 두면 AI가 우리 비즈니스를 이해할 수 있는 출처가 생깁니다.
 
-robots.txt 말고도 점검할 것이 궁금하다면 [AI 검색 준비도 체크리스트](/guides/ai-search-checklist/)를 함께 확인해 보세요.
+robots.txt 말고도 점검할 것이 궁금하다면 [AI 검색(GEO) 준비도 체크리스트](/guides/ai-search-checklist/)를 함께 확인해 보세요.
+
+## 참고한 공식 자료
+
+이 글의 수집 프로그램 이름과 역할은 아래 공식 안내를 기준으로 정리했습니다 (2026년 10월 확인).
+
+- robots.txt 표준: [RFC 9309 Robots Exclusion Protocol](https://www.rfc-editor.org/rfc/rfc9309.html)
+- Google: [robots.txt 소개](https://developers.google.com/search/docs/crawling-indexing/robots/intro), [Google 크롤러와 Google-Extended](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers)
+- OpenAI: [OpenAI 수집 프로그램 안내 (GPTBot, OAI-SearchBot, ChatGPT-User)](https://developers.openai.com/api/docs/bots)
+- Anthropic: [Anthropic 수집 프로그램 안내 (ClaudeBot, Claude-SearchBot, Claude-User)](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler)
+- Perplexity: [Perplexity 수집 프로그램 안내 (PerplexityBot, Perplexity-User)](https://docs.perplexity.ai/docs/resources/perplexity-crawlers)

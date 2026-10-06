@@ -14,7 +14,7 @@ export const GET: APIRoute = async () => {
   const guides = await getGuides();
 
   const lines = [
-    `# ${siteConfig.name}`,
+    `# ${siteConfig.name} (${siteConfig.nameKo})`,
     '',
     `> ${siteConfig.description} ${siteConfig.tagline}`,
     '',

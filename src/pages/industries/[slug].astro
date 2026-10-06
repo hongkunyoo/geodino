@@ -38,7 +38,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 const schema = [
   breadcrumbSchema(breadcrumbs),
-  industryServiceSchema({ name: seo.title, description: seo.description, path, audience: name }),
+  industryServiceSchema({ name: `${name} AI 검색 노출 진단`, description: seo.description, path, audience: name }),
   faqSchema(faqs),
 ];
 ---

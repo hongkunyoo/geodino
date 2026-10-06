@@ -3,7 +3,7 @@ order: 1
 title: AI 검색은 어떻게 우리 비즈니스를 소개할까
 description: 손님이 AI에게 "우리 동네 잘하는 곳 추천해줘"라고 물으면 AI는 어디서 답을 가져올까요? AI 검색이 비즈니스를 소개하는 원리와, 소개되려면 필요한 세 가지를 쉽게 정리했습니다.
 publishedAt: 2026-10-06
-updatedAt: 2026-10-06
+updatedAt: 2026-10-07
 faqs:
   - question: AI 서비스마다 답이 다른가요?
     answer:
@@ -69,4 +69,9 @@ AI는 여러 곳에서 같은 정보를 확인할수록 그 정보를 믿고 쓰
 - 어떤 출처가 인용되는지
 - 우리 대신 어떤 곳이 소개되는지
 
-무엇부터 점검해야 할지 막막하다면 [AI 검색 준비도 체크리스트](/guides/ai-search-checklist/)로 하나씩 확인해 보세요.
+무엇부터 점검해야 할지 막막하다면 [AI 검색(GEO) 준비도 체크리스트](/guides/ai-search-checklist/)로 하나씩 확인해 보세요.
+
+## 참고한 공식 자료
+
+- Google: [AI 기능과 웹사이트 (AI 개요 등 구글 검색의 AI 기능이 웹페이지를 다루는 방식)](https://developers.google.com/search/docs/appearance/ai-features)
+- AI 수집 프로그램별 공식 안내는 [robots.txt 가이드의 참고 자료](/guides/robots-txt/)에 모아 두었습니다.
