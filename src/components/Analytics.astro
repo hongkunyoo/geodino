@@ -1,0 +1,30 @@
+---
+/**
+ * GA4 로더 + data-track 클릭 추적.
+ * PUBLIC_GA_ID가 없으면 GA 스크립트를 넣지 않는다 (추적 호출은 아무 일도 하지 않음).
+ */
+import { siteConfig } from '@/config/site';
+
+const { gaId } = siteConfig.analytics;
+---
+
+{
+  gaId && (
+    <>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+      <script is:inline define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+        window.gtag('js', new Date());
+        window.gtag('config', gaId);
+      </script>
+    </>
+  )
+}
+
+<script>
+  import { initClickTracking } from '@/lib/analytics';
+  initClickTracking();
+</script>

@@ -1,0 +1,261 @@
+---
+/**
+ * 가이드 상세. 본문은 src/content/guides/<slug>.md (Markdown)
+ */
+import { render } from 'astro:content';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Faq from '@/components/sections/Faq.astro';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import { formatDate, getGuides, guideHref, type GuideEntry } from '@/data/guides';
+import { getIndustries, industryHref } from '@/data/industries';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { articleSchema, breadcrumbSchema, faqSchema, type BreadcrumbItem } from '@/lib/schema';
+
+export async function getStaticPaths() {
+  const guides = await getGuides();
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide },
+  }));
+}
+
+interface Props {
+  guide: GuideEntry;
+}
+
+const { guide } = Astro.props;
+const { title, description, publishedAt, updatedAt, faqs, relatedIndustries } = guide.data;
+const { Content } = await render(guide);
+
+const industries = (await getIndustries()).filter((industry) => relatedIndustries.includes(industry.id));
+const path = guideHref(guide);
+const breadcrumbs: BreadcrumbItem[] = [
+  { name: '홈', path: '/' },
+  { name: '가이드', path: '/guides/' },
+  { name: title, path },
+];
+const schema = [
+  breadcrumbSchema(breadcrumbs),
+  articleSchema({ title, description, path, publishedAt, updatedAt }),
+  ...(faqs.length > 0 ? [faqSchema(faqs)] : []),
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" schema={schema}>
+  <article>
+    <header class="guide-header">
+      <div class="container guide-container">
+        <Breadcrumbs items={breadcrumbs} />
+        <h1>{title}</h1>
+        <p class="guide-header__meta">
+          <time datetime={updatedAt.toISOString()}>{formatDate(updatedAt)}</time> 수정
+          {
+            updatedAt.getTime() !== publishedAt.getTime() && (
+              <span>
+                · <time datetime={publishedAt.toISOString()}>{formatDate(publishedAt)}</time> 처음 작성
+              </span>
+            )
+          }
+        </p>
+      </div>
+    </header>
+
+    <div class="container guide-container">
+      <div class="prose">
+        <Content />
+      </div>
+
+      {
+        industries.length > 0 && (
+          <aside class="guide-related" aria-label="관련 업종 안내">
+            <p>업종별 안내</p>
+            <ul>
+              {industries.map((industry) => (
+                <li>
+                  <a href={industryHref(industry)}>{industry.data.name}</a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )
+      }
+    </div>
+  </article>
+
+  {faqs.length > 0 && <Faq items={faqs} />}
+  <FinalCta />
+</BaseLayout>
+
+<style>
+  .guide-container {
+    max-width: calc(720px + var(--container-gutter) * 2);
+  }
+
+  .guide-header {
+    padding-block: var(--space-7) var(--space-5);
+  }
+
+  .guide-header h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .guide-header__meta {
+    margin-top: var(--space-3);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .guide-related {
+    margin-block: var(--space-6) var(--space-8);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .guide-related p {
+    margin-bottom: var(--space-2);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .guide-related ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Markdown 본문 */
+  .prose {
+    padding-bottom: var(--space-7);
+    font-size: 1.0625rem;
+  }
+
+  .prose :global(> * + *) {
+    margin-top: var(--space-4);
+  }
+
+  .prose :global(h2) {
+    margin-top: var(--space-7);
+    font-size: var(--text-xl);
+  }
+
+  .prose :global(h3) {
+    margin-top: var(--space-6);
+    font-size: var(--text-lg);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    display: grid;
+    gap: var(--space-2);
+    padding-left: var(--space-5);
+  }
+
+  .prose :global(li::marker) {
+    color: var(--color-green-500);
+  }
+
+  /* 체크리스트 (- [ ] 항목) */
+  .prose :global(ul.contains-task-list) {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .prose :global(.task-list-item) {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    padding: var(--space-3) var(--space-4);
+    border: var(--border-thin);
+    border-radius: var(--radius-sm);
+  }
+
+  .prose :global(.task-list-item input) {
+    width: 18px;
+    height: 18px;
+    margin-top: 5px;
+    flex-shrink: 0;
+    accent-color: var(--color-primary);
+  }
+
+  .prose :global(code) {
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: 0.9em;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* 코드 상자: 인라인 code 스타일을 되돌리고 상자 전체에만 배경을 준다 */
+  .prose :global(pre) {
+    overflow-x: auto;
+    padding: var(--space-4) var(--space-5);
+    border: var(--border-thin);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface) !important;
+    /* 가는 고정폭 글꼴이 회색 배경 위에서 흐려 보이지 않도록 진한 색·조금 큰 크기·굵기를 준다 */
+    color: var(--color-ink) !important;
+    font-size: 0.95rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.75;
+    -webkit-font-smoothing: auto;
+  }
+
+  .prose :global(pre code),
+  .prose :global(pre span) {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: inherit !important;
+    font-size: inherit;
+  }
+
+  .prose :global(code),
+  .prose :global(pre) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'D2Coding', monospace;
+  }
+
+  /* 표: 좁은 화면에서는 표 안에서만 가로 스크롤 */
+  .prose :global(table) {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .prose :global(th),
+  .prose :global(td) {
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-thin);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .prose :global(th) {
+    background: var(--color-surface);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* 본문 이미지와 바로 아래 기울임 문장(그림 설명) */
+  .prose :global(img) {
+    width: 100%;
+    height: auto;
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+  }
+
+  .prose :global(p:has(> img) + p > em:only-child) {
+    display: block;
+    margin-top: calc(var(--space-2) * -1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    font-style: normal;
+    text-align: center;
+  }
+
+  .prose :global(strong) {
+    font-weight: var(--font-weight-bold);
+  }
+</style>

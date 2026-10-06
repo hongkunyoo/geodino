@@ -1,0 +1,123 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CtaButton from '@/components/CtaButton.astro';
+import type { BreadcrumbItem } from '@/lib/schema';
+
+export interface Props {
+  titleLines: string[];
+  /** 제목 안에서 초록색으로 강조할 단어 */
+  highlight?: string;
+  lead: string;
+  note?: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  /** 제목이 긴 페이지(업종 랜딩 등)는 compact로 글자 크기를 줄인다 */
+  titleSize?: 'default' | 'compact';
+  /** 하위 페이지(업종 랜딩)에서 제목 위에 보여 줄 브레드크럼 */
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { titleLines, highlight, lead, note, image, imageAlt, titleSize = 'default', breadcrumbs } = Astro.props;
+
+const lines = titleLines.map((line) => {
+  if (!highlight || !line.includes(highlight)) return { before: line };
+  const [before, after] = line.split(highlight);
+  return { before, highlight, after };
+});
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+      <h1 id="hero-title" class:list={[titleSize === 'compact' && 'hero__title--compact']}>
+        {
+          lines.map((line, i) => (
+            <span class="hero__line">
+              {line.before}
+              {line.highlight && <em>{line.highlight}</em>}
+              {line.after}
+              {i < lines.length - 1 && ' '}
+            </span>
+          ))
+        }
+      </h1>
+      <p class="hero__lead">{lead}</p>
+      <div class="hero__actions">
+        <CtaButton placement="hero" size="lg" />
+        {note && <p class="hero__note">{note}</p>}
+      </div>
+    </div>
+    <Image
+      class="hero__art"
+      src={image}
+      alt={imageAlt}
+      widths={[360, 480, 720, 1080]}
+      sizes="(min-width: 860px) 480px, min(480px, calc(100vw - 32px))"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--space-7) var(--space-8);
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .hero__line {
+    display: block;
+    text-wrap: balance;
+  }
+
+  .hero__title--compact {
+    font-size: clamp(1.75rem, 1.35rem + 1.8vw, 2.5rem);
+  }
+
+  .hero h1 em {
+    color: var(--color-primary);
+    font-style: normal;
+  }
+
+  .hero__lead {
+    margin-block: var(--space-4) var(--space-6);
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+  }
+
+  .hero__note {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .hero__art {
+    width: 100%;
+    max-width: 480px;
+    justify-self: center;
+  }
+
+  @media (min-width: 860px) {
+    .hero {
+      padding-block: var(--space-9);
+    }
+
+    .hero__inner {
+      grid-template-columns: 1.35fr 1fr;
+    }
+  }
+</style>

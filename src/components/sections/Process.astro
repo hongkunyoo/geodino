@@ -1,0 +1,128 @@
+---
+import SectionHeader from '@/components/SectionHeader.astro';
+import { notDoing, process } from '@/data/home';
+---
+
+<section class="section" aria-labelledby="process-title">
+  <div class="container">
+    <SectionHeader id="process-title" eyebrow={process.eyebrow} title={process.title} lead={process.lead} />
+    <ol class="process__steps">
+      {
+        process.steps.map((step, i) => (
+          <li class="process__step">
+            <p class="process__label">
+              <span>{`STEP ${i + 1}`}</span> {step.label}
+            </p>
+            <h3>{step.title}</h3>
+            <p class="process__desc">{step.description}</p>
+            <ul class="process__items">
+              {step.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+    <aside class="process__not-doing" aria-labelledby="not-doing-title">
+      <h3 id="not-doing-title">{notDoing.title}</h3>
+      <ul>
+        {notDoing.points.map((point) => <li>{point}</li>)}
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .process__steps {
+    display: grid;
+    gap: var(--space-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .process__step {
+    padding: var(--space-5);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+
+  .process__label {
+    margin-bottom: var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .process__label span {
+    margin-right: var(--space-1);
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--color-green-50);
+    color: var(--color-primary);
+  }
+
+  .process__step h3 {
+    font-size: var(--text-lg);
+  }
+
+  .process__desc {
+    margin-block: var(--space-2) var(--space-3);
+    color: var(--color-ink-muted);
+  }
+
+  .process__items {
+    display: grid;
+    gap: var(--space-1);
+    padding-left: var(--space-5);
+  }
+
+  .process__items li::marker {
+    color: var(--color-green-500);
+  }
+
+  .process__not-doing {
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    border: var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+
+  .process__not-doing h3 {
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+  }
+
+  .process__not-doing ul {
+    display: grid;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .process__not-doing li {
+    position: relative;
+    padding-left: var(--space-5);
+  }
+
+  .process__not-doing li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: var(--color-ink-muted);
+    font-weight: var(--font-weight-bold);
+  }
+
+  @media (min-width: 860px) {
+    .process__steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .process__not-doing ul {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: var(--space-6);
+    }
+  }
+</style>

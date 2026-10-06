@@ -1,0 +1,5 @@
+# 검색엔진과 AI 크롤러 모두 허용한다 (AI 인용이 서비스의 목적).
+User-agent: *
+Allow: /
+
+Sitemap: https://geodino.io/sitemap-index.xml

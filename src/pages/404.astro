@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import duoRest from '@/assets/characters/duo-rest.webp';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="페이지를 찾을 수 없습니다" description="요청하신 페이지를 찾을 수 없습니다." noindex>
+  <section class="not-found">
+    <div class="container not-found__inner">
+      <Image
+        class="not-found__art"
+        src={duoRest}
+        alt="엎드려 쉬는 초록 공룡 머리 위에 AI 로봇이 앉아 있는 그림"
+        widths={[360, 560]}
+        sizes="(min-width: 860px) 420px, 80vw"
+        loading="eager"
+      />
+      <h1>페이지를 찾을 수 없습니다</h1>
+      <p>주소가 바뀌었거나 없는 페이지예요. GeoDino도 잠깐 쉬는 중입니다.</p>
+      <a class="btn btn--primary not-found__home" href="/">처음으로</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: var(--space-8);
+    text-align: center;
+  }
+
+  .not-found__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+  }
+
+  .not-found__art {
+    width: min(420px, 80vw);
+  }
+
+  .not-found h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .not-found p {
+    color: var(--color-ink-muted);
+  }
+
+  .not-found__home {
+    margin-top: var(--space-3);
+  }
+</style>

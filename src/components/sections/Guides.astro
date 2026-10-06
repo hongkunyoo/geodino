@@ -1,0 +1,48 @@
+---
+import GuideCard from '@/components/GuideCard.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import { getGuides } from '@/data/guides';
+
+const guides = (await getGuides()).slice(0, 3);
+---
+
+{
+  guides.length > 0 && (
+    <section class="section" aria-labelledby="guides-title">
+      <div class="container">
+        <SectionHeader
+          id="guides-title"
+          eyebrow="가이드"
+          title="먼저 읽어 보세요"
+          lead="AI 검색이 우리 비즈니스를 어떻게 소개하는지, 무엇부터 점검하면 좋은지 정리했습니다."
+        />
+        <div class="guides__grid">
+          {guides.map((guide) => (
+            <GuideCard guide={guide} />
+          ))}
+        </div>
+        <p class="guides__more">
+          <a href="/guides/">가이드 전체 보기</a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .guides__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .guides__more {
+    margin-top: var(--space-5);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  @media (min-width: 768px) {
+    .guides__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+export interface Props {
+  title: string;
+  paragraphs: string[];
+}
+
+const { title, paragraphs } = Astro.props;
+---
+
+<section class="section" aria-labelledby="why-now-title">
+  <div class="container why-now">
+    <h2 id="why-now-title">{title}</h2>
+    <div class="why-now__body">
+      {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-now {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .why-now__body {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 720px;
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+
+  @media (min-width: 860px) {
+    .why-now {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+</style>

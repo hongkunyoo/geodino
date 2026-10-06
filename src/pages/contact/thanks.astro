@@ -1,0 +1,84 @@
+---
+/**
+ * 문의 폼 제출 후 감사 페이지. form-to-ntfy가 _next로 이 페이지에 리다이렉트한다.
+ * 검색 노출 제외(noindex) + sitemap 제외 (astro.config.mjs)
+ */
+import { Image } from 'astro:assets';
+import dinoThumbsup from '@/assets/characters/dino-thumbsup.webp';
+import { siteConfig } from '@/config/site';
+import { contactPage } from '@/data/contact';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const { email } = siteConfig;
+---
+
+<BaseLayout title="신청이 접수되었습니다" description="무료 AI 노출 진단 신청이 접수되었습니다." noindex>
+  <section class="thanks">
+    <div class="container thanks__inner">
+      <Image
+        class="thanks__art"
+        src={dinoThumbsup}
+        alt="엄지를 들어 올린 초록 공룡"
+        widths={[200, 320]}
+        sizes="160px"
+        loading="eager"
+      />
+      <h1>신청이 접수되었습니다</h1>
+      <p class="thanks__lead">보내 주셔서 감사합니다. 이렇게 진행됩니다.</p>
+      <ol class="thanks__steps">
+        {contactPage.nextSteps.map((step) => <li>{step}</li>)}
+      </ol>
+      <p class="thanks__note">
+        며칠이 지나도 연락이 없으면 <a href={`mailto:${email}`}>{email}</a>로 알려 주세요.
+      </p>
+      <div class="thanks__actions">
+        <a class="btn btn--primary" href="/">처음으로</a>
+        <a href="/guides/">기다리는 동안 가이드 읽어 보기</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks {
+    padding-block: var(--space-8);
+  }
+
+  .thanks__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+    max-width: calc(560px + var(--container-gutter) * 2);
+    text-align: center;
+  }
+
+  .thanks__art {
+    width: 160px;
+  }
+
+  .thanks h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .thanks__lead,
+  .thanks__note {
+    color: var(--color-ink-muted);
+  }
+
+  .thanks__steps {
+    display: grid;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-5) var(--space-5) var(--space-5) var(--space-7);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    text-align: left;
+  }
+
+  .thanks__actions {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+</style>

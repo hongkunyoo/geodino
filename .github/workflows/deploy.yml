@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install, build, and upload
+        uses: withastro/action@v6
+        env:
+          # GA4 측정 ID (GeoDino 계정 > geodino 속성). 페이지 소스에 노출되는 공개 값이라 여기에 직접 둔다.
+          # 배포 빌드에서만 GA를 켜서 로컬 개발 방문이 통계에 섞이지 않게 한다.
+          PUBLIC_GA_ID: G-P733X2903C
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

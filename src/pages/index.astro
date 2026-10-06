@@ -1,0 +1,49 @@
+---
+/**
+ * 메인 페이지. 구성: CLAUDE.md 10장 (샘플/데모 섹션은 운영자 결정으로 보류)
+ */
+import Citation from '@/components/sections/Citation.astro';
+import Faq from '@/components/sections/Faq.astro';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import Guides from '@/components/sections/Guides.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Industries from '@/components/sections/Industries.astro';
+import Problem from '@/components/sections/Problem.astro';
+import Process from '@/components/sections/Process.astro';
+import duoChef from '@/assets/characters/duo-chef.webp';
+import dinoMagnifier from '@/assets/characters/dino-magnifier.webp';
+import { siteConfig } from '@/config/site';
+import { mainFaq } from '@/data/faq';
+import { hero, problem } from '@/data/home';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { faqSchema } from '@/lib/schema';
+---
+
+<BaseLayout
+  title={`${siteConfig.name} — ${siteConfig.tagline}`}
+  description="손님이 AI에게 추천을 물을 때 우리 비즈니스가 정확하게 소개되고 있나요? GeoDino가 무료 AI 노출 진단으로 확인하고, AI가 잘 이해하고 인용하도록 비즈니스 정보를 정리해 드립니다."
+  fullTitle
+  schema={[faqSchema(mainFaq)]}
+>
+  <Hero
+    titleLines={hero.titleLines}
+    highlight={hero.highlight}
+    lead={hero.lead}
+    note={hero.note}
+    image={duoChef}
+    imageAlt="초록 공룡 GeoDino가 잘게 썬 웹페이지 조각을 접시에 담아 AI 로봇에게 건네는 그림"
+  />
+  <Problem
+    eyebrow={problem.eyebrow}
+    title={problem.title}
+    lead={problem.lead}
+    quotes={problem.quotes}
+    image={{ src: dinoMagnifier, alt: '돋보기로 무언가를 살펴보는 초록 공룡' }}
+  />
+  <Citation />
+  <Process />
+  <Industries />
+  <Guides />
+  <Faq items={mainFaq} />
+  <FinalCta />
+</BaseLayout>

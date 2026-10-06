@@ -1,0 +1,43 @@
+---
+export interface Props {
+  /** h2의 id. section의 aria-labelledby와 맞춘다 */
+  id: string;
+  title: string;
+  eyebrow?: string;
+  lead?: string;
+  align?: 'start' | 'center';
+}
+
+const { id, title, eyebrow, lead, align = 'start' } = Astro.props;
+---
+
+<header class:list={['section-header', `section-header--${align}`]}>
+  {eyebrow && <p class="section-header__eyebrow">{eyebrow}</p>}
+  <h2 id={id}>{title}</h2>
+  {lead && <p class="section-header__lead">{lead}</p>}
+</header>
+
+<style>
+  .section-header {
+    max-width: 720px;
+    margin-bottom: var(--space-6);
+  }
+
+  .section-header--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .section-header__eyebrow {
+    margin-bottom: var(--space-2);
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .section-header__lead {
+    margin-top: var(--space-3);
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+</style>

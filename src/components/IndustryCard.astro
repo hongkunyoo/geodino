@@ -1,0 +1,106 @@
+---
+import { industryHref, type IndustryEntry } from '@/data/industries';
+
+export interface Props {
+  industry: IndustryEntry;
+  /** 카드 제목 단계 (h2 아래면 h3) */
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { industry, headingLevel = 'h3' } = Astro.props;
+const { name, card } = industry.data;
+const href = industryHref(industry);
+const Heading = headingLevel;
+---
+
+<article class="industry-card">
+  <Heading class="industry-card__name">
+    <a href={href}>{name}</a>
+  </Heading>
+  <p class="industry-card__question">
+    <span class="sr-only">손님 질문 예시:</span>“{card.sampleQuestion}”
+  </p>
+  <p class="industry-card__desc">{card.description}</p>
+  <span class="industry-card__button" aria-hidden="true">자세히 보기 →</span>
+</article>
+
+<style>
+  .industry-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-5);
+    border: var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+
+  .industry-card__name {
+    font-size: var(--text-lg);
+  }
+
+  .industry-card__name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* 링크가 있으면 카드 전체를 클릭 영역으로 */
+  .industry-card__name a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+  }
+
+  .industry-card:has(a:hover),
+  .industry-card:has(a:focus-visible) {
+    background: var(--color-green-50);
+  }
+
+  .industry-card:has(a:hover) .industry-card__question,
+  .industry-card:has(a:focus-visible) .industry-card__question {
+    background: var(--color-bg);
+  }
+
+  .industry-card:has(a:focus-visible) {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .industry-card__name a:focus-visible {
+    outline: none;
+  }
+
+  .industry-card__question {
+    margin-block: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    background: var(--color-green-50);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .industry-card__desc {
+    margin-bottom: var(--space-5);
+    color: var(--color-ink-muted);
+  }
+
+  /* 카드 전체가 링크다. 버튼은 "누를 수 있다"는 표시 */
+  .industry-card__button {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: var(--space-2) var(--space-5);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-pill);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .industry-card:has(a:hover) .industry-card__button,
+  .industry-card:has(a:focus-visible) .industry-card__button {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+import '@/styles/global.css';
+
+import Analytics from '@/components/Analytics.astro';
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+import SEO, { type Props as SEOProps } from '@/components/SEO.astro';
+import { siteConfig } from '@/config/site';
+import { organizationSchema, websiteSchema } from '@/lib/schema';
+
+export interface Props extends SEOProps {
+  /** 업종 페이지에서 지정하면 분석 이벤트에 industry 파라미터가 붙는다 (예: lawyer) */
+  industry?: string;
+}
+
+const { industry, schema = [], ...seo } = Astro.props;
+const pageSchema = [organizationSchema(), websiteSchema(), ...schema];
+---
+
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <SEO {...seo} schema={pageSchema} />
+    <Analytics />
+  </head>
+  <body data-industry={industry}>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

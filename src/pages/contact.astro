@@ -1,0 +1,276 @@
+---
+/**
+ * 무료 AI 노출 진단 신청 (문의 폼). 전송: siteConfig.contact.formAction (form-to-ntfy, Cloud Run)
+ * 제출 후 감사 페이지(/contact/thanks/)로 이동한다. 업종 hidden field는 쓰지 않는다 (CLAUDE.md 16장).
+ */
+import { Image } from 'astro:assets';
+import dinoBow from '@/assets/characters/dino-bow.webp';
+import { siteConfig } from '@/config/site';
+import { consentSummary, contactPage } from '@/data/contact';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const { contact, email, legal } = siteConfig;
+---
+
+<BaseLayout
+  title={contactPage.title}
+  description="이메일만 남기면 무료로 신청할 수 있습니다. 손님이 AI에게 물을 법한 질문으로 지금 우리 비즈니스가 AI에게 어떻게 소개되는지 확인해 드립니다."
+>
+  <section class="contact">
+    <div class="container contact__inner">
+      <div class="contact__main">
+        <h1>{contactPage.title}</h1>
+        <p class="contact__lead">{contactPage.lead}</p>
+
+        <form class="form" action={contact.formAction} method="POST">
+          <input type="hidden" name="_subject" value={contact.formSubject} />
+          <input type="hidden" name="_next" value={new URL(contact.thanksPath, siteConfig.url).href} />
+          <input class="form__honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="form__field">
+            <label for="email">이메일 <span class="form__required">(필수)</span></label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+          </div>
+
+          <div class="form__field">
+            <label for="website">홈페이지 또는 블로그 주소 <span class="form__optional">(선택)</span></label>
+            <input
+              id="website"
+              name="website"
+              type="text"
+              inputmode="url"
+              autocomplete="url"
+              placeholder="예: blog.naver.com/우리사무소"
+            />
+          </div>
+
+          <div class="form__field">
+            <label for="message">요즘 고민 <span class="form__optional">(선택)</span></label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="예: AI에게 우리 동네 세무사를 물어보면 우리 사무소가 안 나와요."></textarea>
+          </div>
+
+          <div class="form__consent">
+            <label class="form__check">
+              <input type="checkbox" name="consent" value="동의함" required />
+              <span>개인정보 수집·이용에 동의합니다 <span class="form__required">(필수)</span></span>
+            </label>
+            <details>
+              <summary>내용 보기</summary>
+              <dl>
+                {
+                  consentSummary.map((item) => (
+                    <div>
+                      <dt>{item.term}</dt>
+                      <dd>{item.detail}</dd>
+                    </div>
+                  ))
+                }
+              </dl>
+              <p>자세한 내용은 <a href={legal.privacyHref}>개인정보 처리방침</a>에서 확인할 수 있습니다.</p>
+            </details>
+          </div>
+
+          <button class="btn btn--primary btn--lg form__submit" type="submit">{contactPage.submitLabel}</button>
+        </form>
+      </div>
+
+      <aside class="contact__aside" aria-labelledby="next-steps-title">
+        <Image
+          class="contact__art"
+          src={dinoBow}
+          alt="두 손을 모으고 고개 숙여 인사하는 초록 공룡"
+          widths={[160, 240]}
+          sizes="120px"
+        />
+        <h2 id="next-steps-title">신청하면 이렇게 진행돼요</h2>
+        <ol>
+          {contactPage.nextSteps.map((step) => <li>{step}</li>)}
+        </ol>
+        <p class="contact__email">
+          폼 대신 이메일로 연락하셔도 됩니다.<br />
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    padding-block: var(--space-7);
+  }
+
+  .contact__inner {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .contact__lead {
+    margin-block: var(--space-4) var(--space-6);
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+
+  .form {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .form__field {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .form__field label {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .form__required {
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+  }
+
+  .form__optional {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .form input[type='email'],
+  .form input[type='text'],
+  .form textarea {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  .form input::placeholder,
+  .form textarea::placeholder {
+    color: var(--color-placeholder);
+  }
+
+  .form input:focus-visible,
+  .form textarea:focus-visible {
+    border-color: var(--color-primary);
+    outline-offset: 0;
+  }
+
+  .form textarea {
+    resize: vertical;
+  }
+
+  .form__honey {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .form__consent {
+    padding: var(--space-4);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    font-size: var(--text-sm);
+  }
+
+  .form__check {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+  }
+
+  .form__check input {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    accent-color: var(--color-primary);
+  }
+
+  .form__consent details {
+    margin-top: var(--space-3);
+    padding-left: 28px;
+    color: var(--color-ink-muted);
+  }
+
+  .form__consent summary {
+    cursor: pointer;
+    color: var(--color-ink);
+  }
+
+  .form__consent dl {
+    display: grid;
+    gap: var(--space-2);
+    margin-block: var(--space-3);
+  }
+
+  .form__consent dl div {
+    display: grid;
+    grid-template-columns: 5.5em 1fr;
+    gap: var(--space-2);
+  }
+
+  .form__consent dt {
+    color: var(--color-ink);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .form__consent dd {
+    margin: 0;
+  }
+
+  .form__submit {
+    justify-self: start;
+  }
+
+  .contact__aside {
+    align-self: start;
+    padding: var(--space-6) var(--space-5);
+    border: var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-green-50);
+  }
+
+  .contact__art {
+    width: 120px;
+    margin-bottom: var(--space-4);
+  }
+
+  .contact__aside h2 {
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+  }
+
+  .contact__aside ol {
+    display: grid;
+    gap: var(--space-2);
+    padding-left: var(--space-5);
+  }
+
+  .contact__email {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: var(--border-thin);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  @media (min-width: 860px) {
+    .contact__inner {
+      grid-template-columns: 1fr 340px;
+    }
+
+    .contact__aside {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-5));
+    }
+  }
+</style>

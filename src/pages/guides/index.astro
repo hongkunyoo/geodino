@@ -1,0 +1,57 @@
+---
+/**
+ * 가이드 목록. 날짜순 블로그가 아니라 주제순 가이드 모음으로 보여준다.
+ */
+import GuideCard from '@/components/GuideCard.astro';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import { getGuides } from '@/data/guides';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const guides = await getGuides();
+---
+
+<BaseLayout
+  title="가이드"
+  description="AI 검색이 우리 비즈니스를 어떻게 소개하는지, 무엇을 정리하면 좋은지 쉽게 정리한 GeoDino 가이드 모음입니다."
+>
+  <section class="page-intro">
+    <div class="container">
+      <h1>가이드</h1>
+      <p class="page-intro__lead">
+        AI 검색이 우리 비즈니스를 어떻게 소개하는지, 무엇을 정리하면 좋은지 쉽게 정리했습니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="가이드 목록">
+    <div class="container guides-grid">
+      {guides.map((guide) => <GuideCard guide={guide} headingLevel="h2" />)}
+    </div>
+  </section>
+
+  <FinalCta />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-block: var(--space-7) var(--space-6);
+  }
+
+  .page-intro__lead {
+    max-width: 720px;
+    margin-top: var(--space-4);
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+
+  .guides-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .guides-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

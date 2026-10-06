@@ -1,0 +1,26 @@
+---
+/**
+ * primary CTA 버튼. 문구·링크는 siteConfig에서 가져오고, 클릭은 cta_click으로 기록된다.
+ */
+import { siteConfig } from '@/config/site';
+
+export interface Props {
+  /** 분석용 위치 (hero, header, final 등) */
+  placement: string;
+  size?: 'md' | 'lg';
+  class?: string;
+}
+
+const { placement, size = 'md', class: className } = Astro.props;
+const { primaryCta } = siteConfig;
+---
+
+<a
+  class:list={['btn', 'btn--primary', size === 'lg' && 'btn--lg', className]}
+  href={primaryCta.href}
+  data-track="cta_click"
+  data-track-placement={placement}
+  data-track-action={primaryCta.action}
+>
+  {primaryCta.label}
+</a>

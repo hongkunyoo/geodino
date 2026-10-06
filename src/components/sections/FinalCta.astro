@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import dinoThumbsup from '@/assets/characters/dino-thumbsup.webp';
+import CtaButton from '@/components/CtaButton.astro';
+import { finalCta } from '@/data/home';
+
+export interface Props {
+  title?: string;
+  lead?: string;
+}
+
+const { title = finalCta.title, lead = finalCta.lead } = Astro.props;
+---
+
+<section class="section" aria-labelledby="final-cta-title">
+  <div class="container">
+    <div class="final-cta">
+      <Image
+        class="final-cta__art"
+        src={dinoThumbsup}
+        alt="엄지를 들어 보이는 초록 공룡"
+        widths={[200, 360]}
+        sizes="(min-width: 860px) 180px, 140px"
+      />
+      <div>
+        <h2 id="final-cta-title">{title}</h2>
+        <p class="final-cta__lead">{lead}</p>
+        <CtaButton placement="final" size="lg" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: center;
+    padding: var(--space-7) var(--space-5);
+    border: var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-green-50);
+    text-align: center;
+  }
+
+  .final-cta__art {
+    width: 140px;
+  }
+
+  .final-cta__lead {
+    margin-block: var(--space-3) var(--space-5);
+    color: var(--color-ink-muted);
+  }
+
+  @media (min-width: 860px) {
+    .final-cta {
+      grid-template-columns: 180px 1fr;
+      justify-items: start;
+      padding: var(--space-7);
+      text-align: left;
+    }
+
+    .final-cta__art {
+      width: 180px;
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import IndustryCard from '@/components/IndustryCard.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import { getIndustries, otherIndustriesNote } from '@/data/industries';
+
+const industries = await getIndustries();
+---
+
+<section id="industries" class="section industries" aria-labelledby="industries-title">
+  <div class="container">
+    <SectionHeader
+      id="industries-title"
+      eyebrow="업종별 안내"
+      title="손님이 AI에게 추천을 묻는 업종이라면"
+      lead="업종마다 손님이 묻는 질문이 다릅니다. 그 질문에 맞춰 정리합니다."
+    />
+    <div class="industries__grid">
+      {industries.map((industry) => <IndustryCard industry={industry} />)}
+    </div>
+    <p class="industries__note">
+      {otherIndustriesNote}
+    </p>
+  </div>
+</section>
+
+<style>
+  /* 헤더 메뉴의 /#industries 앵커로 이동할 때 고정 헤더에 가리지 않게 */
+  .industries {
+    scroll-margin-top: var(--header-height);
+  }
+
+  .industries__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .industries__note {
+    margin-top: var(--space-5);
+    color: var(--color-ink-muted);
+  }
+
+  @media (min-width: 768px) {
+    .industries__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

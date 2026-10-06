@@ -1,0 +1,225 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/brand/logo.png';
+import { siteConfig, type NavItem } from '@/config/site';
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (item: NavItem) => currentPath.startsWith(item.activePrefix ?? item.href);
+const { primaryCta } = siteConfig;
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="header__logo" href="/" aria-label={`${siteConfig.name} 홈`}>
+      <Image src={logo} alt="" width={36} height={36} densities={[1, 2, 3]} loading="eager" />
+      <span>{siteConfig.name}</span>
+    </a>
+
+    <nav class="header__nav" aria-label="주요 메뉴">
+      <ul>
+        {
+          siteConfig.nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isCurrent(item) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a
+      class="btn btn--primary header__cta"
+      href={primaryCta.href}
+      data-track="cta_click"
+      data-track-placement="header"
+      data-track-action={primaryCta.action}
+    >
+      {primaryCta.label}
+    </a>
+
+    <details class="header__menu">
+      <summary aria-label="메뉴 열기">
+        <span class="header__menu-icon" aria-hidden="true"></span>
+      </summary>
+      <nav class="header__menu-panel" aria-label="모바일 메뉴">
+        <ul>
+          {
+            siteConfig.nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isCurrent(item) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: var(--border-thin);
+    background: rgb(255 255 255 / 0.94);
+    backdrop-filter: blur(8px);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    height: var(--header-height);
+  }
+
+  .header__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-right: auto;
+    color: var(--color-ink);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .header__logo img {
+    border-radius: 10px;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__nav ul,
+  .header__menu-panel ul {
+    display: flex;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header__nav ul {
+    gap: var(--space-5);
+  }
+
+  .header__nav a,
+  .header__menu-panel a {
+    color: var(--color-ink);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+  }
+
+  .header__nav a:hover,
+  .header__nav a[aria-current='page'] {
+    color: var(--color-primary);
+  }
+
+  .header__cta {
+    min-height: 40px;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  /* mobile menu (JS 없이 details 사용) */
+  .header__menu summary {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .header__menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .header__menu-icon,
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-ink);
+  }
+
+  .header__menu-icon {
+    position: relative;
+  }
+
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .header__menu-icon::before {
+    top: -6px;
+  }
+
+  .header__menu-icon::after {
+    top: 6px;
+  }
+
+  .header__menu[open] .header__menu-icon {
+    background: transparent;
+  }
+
+  .header__menu[open] .header__menu-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .header__menu[open] .header__menu-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  .header__menu-panel {
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+    left: 0;
+    border-bottom: var(--border-thin);
+    background: var(--color-bg);
+  }
+
+  .header__menu-panel ul {
+    flex-direction: column;
+    padding: var(--space-2) var(--container-gutter) var(--space-4);
+  }
+
+  .header__menu-panel a {
+    display: block;
+    padding: var(--space-3) 0;
+    border-bottom: var(--border-thin);
+  }
+
+  .header__menu-panel a[aria-current='page'] {
+    color: var(--color-primary);
+  }
+
+  @media (min-width: 860px) {
+    .header__nav {
+      display: block;
+    }
+
+    .header__menu {
+      display: none;
+    }
+
+    .header__cta {
+      font-size: var(--text-base);
+      padding: var(--space-2) var(--space-5);
+    }
+  }
+</style>

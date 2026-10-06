@@ -1,0 +1,76 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import SectionHeader from '@/components/SectionHeader.astro';
+
+export interface Props {
+  eyebrow?: string;
+  title: string;
+  lead: string;
+  /** 손님·사장님이 직접 하는 말 (CLAUDE.md 23장: "비즈니스" 대신 "우리"/업종 명사) */
+  quotes: string[];
+  image?: { src: ImageMetadata; alt: string };
+}
+
+const { eyebrow = '이런 적 있으신가요?', title, lead, quotes, image } = Astro.props;
+---
+
+<section class="section" aria-labelledby="problem-title">
+  <div class:list={['container', 'problem', image && 'problem--with-art']}>
+    <div>
+      <SectionHeader id="problem-title" eyebrow={eyebrow} title={title} lead={lead} />
+      <ul class="problem__quotes">
+        {quotes.map((quote) => <li>“{quote}”</li>)}
+      </ul>
+    </div>
+    {
+      image && (
+        <Image
+          class="problem__art"
+          src={image.src}
+          alt={image.alt}
+          widths={[240, 360, 480]}
+          sizes="(min-width: 860px) 280px, 200px"
+        />
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .problem {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .problem__quotes {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .problem__quotes li {
+    padding: var(--space-4) var(--space-5);
+    border: var(--border-thin);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .problem__art {
+    width: 200px;
+    justify-self: center;
+  }
+
+  @media (min-width: 860px) {
+    .problem--with-art {
+      grid-template-columns: 1fr 280px;
+    }
+
+    .problem__art {
+      width: 280px;
+    }
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+/**
+ * 화면에 보이는 브레드크럼. 마지막 항목은 현재 페이지(링크 없음).
+ * 같은 items로 breadcrumbSchema()를 만들어 구조화 데이터와 맞춘다 (CLAUDE.md 4.1, 11장).
+ */
+import type { BreadcrumbItem } from '@/lib/schema';
+
+export interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="현재 위치">
+  <ol>
+    {
+      items.map((item, i) =>
+        i < items.length - 1 ? (
+          <li>
+            <a href={item.path}>{item.name}</a>
+          </li>
+        ) : (
+          <li aria-current="page">{item.name}</li>
+        ),
+      )
+    }
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    margin-bottom: var(--space-4);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  /* 긴 현재 페이지 이름(가이드 제목)은 한 줄로 줄인다. 전체 제목은 바로 아래 h1에 있다 */
+  li[aria-current] {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  li + li::before {
+    content: '›';
+    margin-right: var(--space-2);
+    color: var(--color-ink-muted);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  a:hover {
+    color: var(--color-primary);
+  }
+</style>

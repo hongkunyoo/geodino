@@ -1,0 +1,76 @@
+/* 디자인 토큰. 기준: docs/brand.md (흰 바탕 + 검정 글씨·선 + 초록 포인트) */
+:root {
+  /* color */
+  --color-bg: #ffffff;
+  --color-surface: #f6f8f6;
+  --color-ink: #17191c;
+  --color-ink-muted: #5a615d;
+  --color-line: #e2e6e3;
+  --color-line-strong: #848b87; /* 입력창 테두리 (흰 바탕 3.5:1) */
+  --color-placeholder: #6e7571; /* 흰 바탕 4.7:1 */
+
+  --color-green-50: #eef7f0;
+  --color-green-100: #ddf2e3;
+  --color-green-400: #6cc486; /* 공룡 몸. 위에 흰 글씨 금지 */
+  --color-green-500: #2e9e5b; /* 장식 전용. 텍스트 금지 */
+  --color-green-700: #18723e; /* primary: CTA 배경, 링크 */
+  --color-green-800: #125a31; /* hover/active */
+
+  --color-bot: #2b2f36;
+  --color-bot-light: #8a9099;
+
+  --color-primary: var(--color-green-700);
+  --color-primary-hover: var(--color-green-800);
+  --color-on-primary: #ffffff;
+  --color-focus: var(--color-green-700);
+
+  /* typography */
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --text-sm: 0.875rem; /* 14 */
+  --text-base: 1.0625rem; /* 17 */
+  --text-lg: 1.25rem; /* 20 */
+  --text-xl: 1.5rem; /* 24 */
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem); /* 28 → 36 */
+  --text-3xl: clamp(2rem, 1.5rem + 2.6vw, 3.25rem); /* 32 → 52 */
+
+  --leading-tight: 1.3;
+  --leading-body: 1.7;
+
+  /* spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* shape */
+  --radius-sm: 12px; /* 입력창 */
+  --radius-md: 16px; /* 카드 */
+  --radius-pill: 999px; /* 버튼 */
+  --border-thin: 1px solid var(--color-line);
+  --border-strong: 2px solid var(--color-ink);
+
+  /* layout */
+  --container-max: 1120px;
+  --container-gutter: 16px;
+  --header-height: 64px;
+
+  /* motion: 아주 작게만 */
+  --transition-fast: 150ms ease;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-gutter: 24px;
+    --header-height: 72px;
+  }
+}
