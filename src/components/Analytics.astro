@@ -1,6 +1,6 @@
 ---
 /**
- * GA4 로더 + data-track 클릭 추적.
+ * GA4 로더 + 업종 페이지 조회·data-track 클릭 추적. 문의 시작·완료는 contact 페이지에서 따로 붙인다.
  * PUBLIC_GA_ID가 없으면 GA 스크립트를 넣지 않는다 (추적 호출은 아무 일도 하지 않음).
  */
 import { siteConfig } from '@/config/site';
@@ -25,6 +25,7 @@ const { gaId } = siteConfig.analytics;
 }
 
 <script>
-  import { initClickTracking } from '@/lib/analytics';
+  import { initClickTracking, initPageTracking } from '@/lib/analytics';
+  initPageTracking();
   initClickTracking();
 </script>

@@ -39,6 +39,11 @@ const { email } = siteConfig;
   </section>
 </BaseLayout>
 
+<script>
+  import { trackContactSubmitted } from '@/lib/analytics';
+  trackContactSubmitted();
+</script>
+
 <style>
   .thanks {
     padding-block: var(--space-8);
