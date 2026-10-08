@@ -9,21 +9,32 @@ import FinalCta from '@/components/sections/FinalCta.astro';
 import Guides from '@/components/sections/Guides.astro';
 import Hero from '@/components/sections/Hero.astro';
 import Industries from '@/components/sections/Industries.astro';
+import IntroVideo from '@/components/sections/IntroVideo.astro';
 import Problem from '@/components/sections/Problem.astro';
 import Process from '@/components/sections/Process.astro';
 import dinoMagnifier from '@/assets/characters/dino-magnifier.webp';
 import { siteConfig } from '@/config/site';
 import { mainFaq } from '@/data/faq';
-import { hero, problem } from '@/data/home';
+import { hero, introVideo, problem } from '@/data/home';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { faqSchema } from '@/lib/schema';
+import { faqSchema, videoSchema } from '@/lib/schema';
 ---
 
 <BaseLayout
   title={`AI 검색(GEO) 노출 진단 — 변호사·세무사·학원·인테리어 | ${siteConfig.name}`}
   description="손님이 ChatGPT·Gemini 같은 AI에게 추천을 물을 때 우리 비즈니스가 나오는지 무료로 진단합니다. AI 검색 최적화(GEO)로 AI가 비즈니스 정보를 정확하게 인용하도록 정리합니다."
   fullTitle
-  schema={[faqSchema(mainFaq)]}
+  schema={[
+    faqSchema(mainFaq),
+    videoSchema({
+      name: introVideo.name,
+      description: introVideo.description,
+      thumbnailPath: introVideo.poster,
+      contentPath: introVideo.src,
+      uploadDate: introVideo.uploadDate,
+      durationISO: introVideo.durationISO,
+    }),
+  ]}
 >
   <Hero
     eyebrow={hero.eyebrow}
@@ -31,9 +42,11 @@ import { faqSchema } from '@/lib/schema';
     highlight={hero.highlight}
     lead={hero.lead}
     note={hero.note}
+    subLink={{ label: introVideo.linkLabel, href: `#${introVideo.id}` }}
   >
     <AiAnswerExample slot="visual" />
   </Hero>
+  <IntroVideo />
   <Problem
     eyebrow={problem.eyebrow}
     title={problem.title}

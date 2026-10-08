@@ -1,0 +1,132 @@
+---
+/**
+ * 30초 소개 영상. 처음에는 포스터와 재생 버튼만 보이고(영상 미리 받지 않음), 누르면 소리와 함께 재생한다.
+ * 자막은 영상에 들어 있다. 재생·완료는 video_play / video_complete로 기록한다 (CLAUDE.md 14.1).
+ */
+import SectionHeader from '@/components/SectionHeader.astro';
+import { introVideo } from '@/data/home';
+
+const { id, eyebrow, title, lead, src, poster, name } = introVideo;
+---
+
+<section class="section" id={id} aria-labelledby={`${id}-title`}>
+  <div class="container">
+    <SectionHeader id={`${id}-title`} eyebrow={eyebrow} title={title} lead={lead} />
+    <figure class="intro-video" data-intro-video>
+      <video
+        src={src}
+        poster={poster}
+        preload="none"
+        playsinline
+        controls
+        width="1920"
+        height="1080"
+        aria-label={name}
+        data-track-video="intro"
+      >
+      </video>
+      <button class="intro-video__play" type="button" aria-label="소개 영상 재생 (30초, 소리 있음)">
+        <span class="intro-video__icon" aria-hidden="true"></span>
+        <span class="intro-video__label">30초 영상 보기</span>
+      </button>
+    </figure>
+  </div>
+</section>
+
+<script>
+  import { initVideoTracking } from '@/lib/analytics';
+
+  document.querySelectorAll<HTMLElement>('[data-intro-video]').forEach((figure) => {
+    const video = figure.querySelector('video');
+    const button = figure.querySelector('button');
+    if (!video || !button) return;
+    initVideoTracking(video, video.dataset.trackVideo ?? 'intro');
+    // 처음 재생하면 큰 재생 버튼을 숨기고 기본 컨트롤만 남긴다
+    video.addEventListener('play', () => figure.classList.add('is-started'), { once: true });
+    button.addEventListener('click', () => {
+      void video.play();
+    });
+  });
+</script>
+
+<style>
+  .intro-video {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+
+  .intro-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg);
+  }
+
+  .intro-video__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    border: 0;
+    background: rgb(23 25 28 / 0.18);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+
+  .intro-video__play:hover {
+    background: rgb(23 25 28 / 0.28);
+  }
+
+  .intro-video__icon {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 6px 20px rgb(23 25 28 / 0.25);
+    position: relative;
+  }
+
+  /* 재생 삼각형 */
+  .intro-video__icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    translate: -50% -50%;
+    border-style: solid;
+    border-width: 16px 0 16px 26px;
+    border-color: transparent transparent transparent var(--color-on-primary);
+  }
+
+  .intro-video__label {
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .intro-video.is-started .intro-video__play {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .intro-video__icon {
+      width: 64px;
+      height: 64px;
+    }
+
+    .intro-video__icon::after {
+      border-width: 12px 0 12px 19px;
+    }
+  }
+</style>

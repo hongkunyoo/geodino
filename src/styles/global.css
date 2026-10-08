@@ -103,7 +103,8 @@ a:hover {
  * <main>의 직계 자식 section/article 기준. 컴포넌트에서 배경을 직접 지정하지 않는다 (CLAUDE.md 19장).
  * 섹션 안의 상자(카드, 패널)는 어느 배경 위에서도 구분되도록 테두리나 흰 배경을 가진다.
  */
-main > :is(section, article):nth-child(even) {
+/* `of` 구문: section/article만 센다. 사이에 <script> 같은 다른 요소가 끼어도 교차가 밀리지 않는다 */
+main > :nth-child(even of section, article) {
   background: var(--color-surface);
 }
 

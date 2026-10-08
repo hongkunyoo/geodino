@@ -125,6 +125,22 @@ export function initContactFormTracking(form: HTMLFormElement): void {
   });
 }
 
+/** 소개 영상: 처음 재생할 때 video_play, 끝까지 보면 video_complete (페이지당 각 1회) */
+export function initVideoTracking(video: HTMLVideoElement, name: string): void {
+  let played = false;
+  let completed = false;
+  video.addEventListener('play', () => {
+    if (played) return;
+    played = true;
+    track(ANALYTICS_EVENTS.videoPlay, { video: name });
+  });
+  video.addEventListener('ended', () => {
+    if (completed) return;
+    completed = true;
+    track(ANALYTICS_EVENTS.videoComplete, { video: name });
+  });
+}
+
 /** 감사 페이지에서 호출한다. 이 탭에서 폼을 제출하고 넘어온 경우에만 한 번 기록한다 (새로고침·직접 접속 제외). */
 export function trackContactSubmitted(): void {
   if (readSession(STORAGE_KEYS.pendingSubmit) !== '1') return;

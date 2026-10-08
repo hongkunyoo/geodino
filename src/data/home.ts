@@ -43,6 +43,26 @@ export const heroExample = {
   caption: '예시: 손님이 AI에게 세무사를 물었을 때의 답변 화면 (실제 AI 답변이나 실제 업체가 아닙니다)',
 };
 
+/**
+ * 30초 소개 영상 (Phase 7, 후보 A-1 fal 선택). 원본·편집: video/storyboard.md, video/remotion/
+ * 영상 속 AI 답변은 "예시 화면"이며 실제 답변·실제 업체가 아니다.
+ */
+export const introVideo = {
+  id: 'intro-video',
+  eyebrow: '30초 소개',
+  title: '30초 영상으로 보는 GeoDino',
+  lead: '손님이 AI에게 추천을 물었을 때 무슨 일이 일어나는지, GeoDino가 무엇을 정리하는지 보여 드립니다.',
+  src: '/video/geodino-intro.mp4',
+  poster: '/video/geodino-intro-poster.jpg',
+  /** 구조화 데이터(VideoObject)용 */
+  name: 'GeoDino 30초 소개 — 손님이 AI에게 물을 때 우리 비즈니스가 나오나요?',
+  description:
+    '손님이 AI에게 세무사 추천을 물었는데 우리 사무소가 답변에 없는 예시로, AI가 웹에 정리된 정보로 답을 만든다는 점과 GeoDino의 진단·정리·다시 확인 과정을 30초로 소개합니다.',
+  uploadDate: '2026-10-07',
+  durationISO: 'PT30S',
+  /** 히어로에서 영상으로 내려가는 링크 */
+};
+
 export const problem = {
   eyebrow: '이런 적 있으신가요?',
   title: 'AI 답변 속 우리 비즈니스, 이렇게 보이고 있지 않나요?',

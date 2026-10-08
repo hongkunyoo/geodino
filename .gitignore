@@ -5,6 +5,7 @@ docs/positioning.md
 docs/guides-backlog.md
 docs/seo-geo-audit.md
 docs/competitor-research.md
+docs/diagnosis-process-brainstorm.md
 docs/research/
 # secrets / API keys
 .runway_key.txt
@@ -27,3 +28,12 @@ dist/
 # 브랜드 작업 기록(프롬프트, 후보 보드, 원본 이미지, 가공 스크립트)은 로컬에서만 관리
 # 웹에서 쓰는 가공본만 커밋: src/assets/, public/ (아이콘, og/og-default.jpg)
 /brand/
+
+# 영상 작업물: 큰 바이너리(클립·키프레임·렌더 결과)는 로컬에서만 관리
+# 커밋하는 것: video/remotion의 소스·설정·스크립트·폰트·이미지·음악 (작은 소스 자산)
+# 주의: AI 클립(public/clips/)은 제외되므로 콘셉트 A·B를 다시 렌더하려면 로컬 video/assets/clips/가 필요하다 (따로 백업)
+/video/assets/
+/video/output/
+/video/remotion/node_modules/
+/video/remotion/public/clips/
+/video/remotion/out/

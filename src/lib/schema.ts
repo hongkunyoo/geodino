@@ -37,6 +37,29 @@ export function organizationSchema(): JsonLd {
   };
 }
 
+/** 페이지에 실제로 보이는 영상일 때만 쓴다 */
+export function videoSchema(input: {
+  name: string;
+  description: string;
+  thumbnailPath: string;
+  contentPath: string;
+  uploadDate: string;
+  durationISO: string;
+}): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: input.name,
+    description: input.description,
+    thumbnailUrl: absoluteUrl(input.thumbnailPath),
+    contentUrl: absoluteUrl(input.contentPath),
+    uploadDate: input.uploadDate,
+    duration: input.durationISO,
+    inLanguage: 'ko-KR',
+    publisher: { '@id': ORGANIZATION_ID },
+  };
+}
+
 export interface BreadcrumbItem {
   name: string;
   path: string;
