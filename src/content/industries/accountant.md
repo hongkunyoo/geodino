@@ -4,7 +4,7 @@ name: 세무사 · 세무사무소
 
 seo:
   title: 세무사·세무사무소 AI 검색(GEO) 대응 — ChatGPT에 우리 사무소가 나오나요?
-  description: 사업자가 ChatGPT·Gemini 같은 AI에게 세무사를 물을 때 우리 사무소가 나오는지 무료로 진단합니다. 기장·종합소득세·양도·상속 업무를 AI가 정확하게 인용하도록 정리합니다.
+  description: ChatGPT·Gemini 같은 AI에 우리 사무소가 나오는지 무료로 진단하고, 기장·종합소득세·양도·상속 업무를 정확하게 정리합니다.
 
 card:
   sampleQuestion: 개인사업자 종합소득세 세무사 비용 얼마야?

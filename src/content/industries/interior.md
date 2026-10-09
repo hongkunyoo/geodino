@@ -4,7 +4,7 @@ name: 인테리어 · 리모델링
 
 seo:
   title: 인테리어 업체 AI 검색(GEO) 대응 — ChatGPT에 우리 업체가 나오나요?
-  description: 손님이 ChatGPT·Gemini 같은 AI에게 인테리어 업체를 물을 때 우리 업체가 나오는지 무료로 진단합니다. 시공 범위·지역·견적 방식을 AI가 정확하게 인용하도록 정리합니다.
+  description: ChatGPT·Gemini 같은 AI에 우리 업체가 나오는지 무료로 진단하고, 시공 범위·지역·견적 방식을 정확하게 정리합니다.
 
 card:
   sampleQuestion: 30평 아파트 전체 인테리어 비용 얼마야?

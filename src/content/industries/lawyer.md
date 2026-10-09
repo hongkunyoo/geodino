@@ -4,7 +4,7 @@ name: 변호사 · 법률사무소
 
 seo:
   title: 변호사·법률사무소 AI 검색(GEO) 대응 — ChatGPT에 우리 사무소가 나오나요?
-  description: 의뢰인이 ChatGPT·Gemini 같은 AI에게 변호사를 물을 때 우리 사무소가 나오는지 무료로 진단합니다. 주력 분야·지역·상담 절차를 AI가 정확하게 인용하도록 정리합니다.
+  description: ChatGPT·Gemini 같은 AI에 우리 사무소가 나오는지 무료로 진단하고, 주력 분야·지역·상담 절차를 정확하게 정리합니다.
 
 card:
   sampleQuestion: 분당에서 이혼 소송 잘하는 변호사 추천해줘

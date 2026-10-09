@@ -1,7 +1,7 @@
 ---
 order: 3
 title: AI가 우리 정보를 가져갈 수 있을까? robots.txt 쉽게 이해하기
-description: AI 서비스가 우리 웹페이지를 읽어 갈 수 있는지는 robots.txt라는 안내문에 달려 있습니다. robots.txt가 무엇인지, 왜 많은 플랫폼이 AI를 막는지, 우리 비즈니스는 무엇을 확인하고 어떻게 설정하면 좋은지 정리했습니다.
+description: AI가 우리 웹페이지를 읽을 수 있는지는 robots.txt에 달려 있습니다. 왜 많은 플랫폼이 AI를 막는지, 무엇을 확인할지 정리했습니다.
 publishedAt: 2026-10-06
 updatedAt: 2026-10-07
 faqs:

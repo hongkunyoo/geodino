@@ -4,7 +4,7 @@ name: 학원 · 교육
 
 seo:
   title: 학원 AI 검색(GEO) 대응 — ChatGPT에 우리 학원이 나오나요?
-  description: 학부모가 ChatGPT·Gemini 같은 AI에게 학원을 물을 때 우리 학원이 나오는지 무료로 진단합니다. 대상 학년·과목·수업 방식을 AI가 정확하게 인용하도록 정리합니다.
+  description: ChatGPT·Gemini 같은 AI에 우리 학원이 나오는지 무료로 진단하고, 대상 학년·과목·수업 방식을 정확하게 정리합니다.
 
 card:
   sampleQuestion: 목동 중2 수학 학원 추천해줘
