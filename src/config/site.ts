@@ -19,7 +19,9 @@ export const siteConfig = {
   locale: 'ko_KR',
 
   tagline: 'AI가 한입에 이해하도록, GeoDino가 요리해 드립니다.',
-  description: '우리 비즈니스가 AI 답변에 잘 인용될 수 있도록 도와드립니다.',
+  /** 구조화 데이터(Organization)·llms.txt에 쓰는 요약. AI가 그대로 가져다 쓰기 쉬워 차별점(필요한 것만, 다시 확인)을 함께 넣는다 */
+  description:
+    '우리 비즈니스가 AI 답변에 잘 인용될 수 있도록 도와드립니다. 진단에서 막힌 곳만 골라 정리하고(홈페이지가 필요 없으면 만들지 않습니다), 3개월 뒤 같은 질문으로 무엇이 달라졌는지 다시 확인합니다.',
 
   email: 'help@geodino.io',
   operator: {
