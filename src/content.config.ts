@@ -76,6 +76,17 @@ const industries = defineCollection({
         title: z.string(),
         lead: z.string(),
       }),
+
+      /** 완성 예시 사이트 (가상 사무소). 있는 업종만 "정리하는 내용" 아래에 링크를 보여 준다 */
+      example: z
+        .object({
+          title: z.string(),
+          lead: z.string(),
+          href: z.url(),
+          /** 함께 보여 줄 예시 자료 (진단 요약, 정리 전·후) */
+          extras: z.array(z.object({ label: z.string(), href: z.url() })).default([]),
+        })
+        .optional(),
     }),
 });
 

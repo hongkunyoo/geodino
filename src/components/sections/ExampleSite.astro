@@ -1,0 +1,64 @@
+---
+/**
+ * 완성 예시 사이트 링크 (가상 사무소). 실제 고객 사례처럼 보이지 않도록 "예시"와 "가상"을 함께 밝힌다.
+ */
+import SectionHeader from '@/components/SectionHeader.astro';
+
+export interface Props {
+  title: string;
+  lead: string;
+  href: string;
+  extras: { label: string; href: string }[];
+}
+
+const { title, lead, href, extras } = Astro.props;
+---
+
+<section class="section" aria-labelledby="example-title">
+  <div class="container">
+    <SectionHeader id="example-title" eyebrow="완성 예시" title={title} lead={lead} />
+    <div class="example">
+      <a class="btn btn--primary" href={href}>예시 사이트 보기</a>
+      {
+        extras.length > 0 && (
+          <ul class="example__extras">
+            {extras.map((extra) => (
+              <li>
+                <a href={extra.href}>{extra.label} →</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+    <p class="example__note">실제 법률사무소가 아니며, 이름·주소·연락처·진단 결과는 모두 가상입니다.</p>
+  </div>
+</section>
+
+<style>
+  .example {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-5);
+  }
+
+  .example__extras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    padding: 0;
+    list-style: none;
+  }
+
+  .example__extras a {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .example__note {
+    margin-top: var(--space-4);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+</style>

@@ -84,6 +84,16 @@ faqs:
     answer:
       - 처음 3개월은 진단부터 정리 작업까지 비용 없이 진행합니다. 3개월 뒤 계속 이용할지는 직접 결정하시면 되고, 이후 비용은 추후 협의합니다.
 
+example:
+  title: 완성된 공식 안내 페이지 예시
+  lead: 가상의 분당 법률사무소를 기준으로 만든 예시입니다. "AI가 읽는 부분 보기"를 켜면 각 부분을 왜 이렇게 정리했는지 함께 볼 수 있습니다.
+  href: https://law-demo.geodino.io/
+  extras:
+    - label: 무료 진단 요약 예시
+      href: https://law-demo.geodino.io/sample-report/
+    - label: 정리 전·후 비교
+      href: https://law-demo.geodino.io/before-after/
+
 finalCta:
   title: 우리 사무소가 AI에게 어떻게 소개되는지 확인해 보세요
   lead: 진단은 무료입니다. 처음 3개월은 정리 작업까지 비용 없이 진행합니다.

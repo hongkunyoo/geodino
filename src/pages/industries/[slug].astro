@@ -1,9 +1,10 @@
 ---
 /**
  * 업종 랜딩 페이지 템플릿. 내용은 src/content/industries/<slug>.md 에서 온다.
- * 구성: CLAUDE.md 9장 (예시/데모, 진행 방식 섹션은 운영자 결정으로 제외)
+ * 구성: CLAUDE.md 9장 (진행 방식 섹션은 운영자 결정으로 제외. 완성 예시는 example이 있는 업종만)
  */
 import AiQuestions from '@/components/sections/AiQuestions.astro';
+import ExampleSite from '@/components/sections/ExampleSite.astro';
 import Faq from '@/components/sections/Faq.astro';
 import FinalCta from '@/components/sections/FinalCta.astro';
 import Guides from '@/components/sections/Guides.astro';
@@ -28,7 +29,7 @@ interface Props {
 }
 
 const { industry } = Astro.props;
-const { name, seo, hero, problem, questions, whyNow, organize, faqs, finalCta } = industry.data;
+const { name, seo, hero, problem, questions, whyNow, organize, faqs, finalCta, example } = industry.data;
 const path = industryHref(industry);
 
 // 홈 > 업종 랜딩 2단계 (CLAUDE.md 4.1). 업종 목록 페이지가 없으므로 중간 단계를 두지 않는다.
@@ -56,6 +57,7 @@ const schema = [
   <AiQuestions title={questions.title} lead={questions.lead} items={questions.items} />
   <WhyNow title={whyNow.title} paragraphs={whyNow.paragraphs} />
   <Organize title={organize.title} lead={organize.lead} items={organize.items} />
+  {example && <ExampleSite {...example} />}
   <Faq items={faqs} />
   <Guides />
   <FinalCta title={finalCta.title} lead={finalCta.lead} />
