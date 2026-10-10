@@ -13,8 +13,6 @@ export interface Props {
   highlight?: string;
   lead: string;
   note?: string;
-  /** CTA 아래 보조 텍스트 링크 (예: 소개 영상으로 이동). primary CTA는 하나로 유지한다 */
-  subLink?: { label: string; href: string };
   /** 히어로 그림. 없으면 visual 슬롯을 쓴다 (메인의 예시 AI 답변 화면) */
   image?: ImageMetadata;
   imageAlt?: string;
@@ -24,7 +22,7 @@ export interface Props {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const { eyebrow, titleLines, highlight, lead, note, subLink, image, imageAlt = '', titleSize = 'default', breadcrumbs } =
+const { eyebrow, titleLines, highlight, lead, note, image, imageAlt = '', titleSize = 'default', breadcrumbs } =
   Astro.props;
 
 const lines = titleLines.map((line) => {
@@ -54,7 +52,6 @@ const lines = titleLines.map((line) => {
       <p class="hero__lead">{lead}</p>
       <CtaButton placement="hero" size="lg" />
       {note && <p class="hero__note">{note}</p>}
-      {subLink && <a class="hero__sublink" href={subLink.href}>{subLink.label}</a>}
     </div>
     {
       image ? (
@@ -109,12 +106,6 @@ const lines = titleLines.map((line) => {
     margin-block: var(--space-4) var(--space-6);
     color: var(--color-ink-muted);
     font-size: var(--text-lg);
-  }
-
-  .hero__sublink {
-    display: inline-block;
-    margin-top: var(--space-4);
-    font-weight: var(--font-weight-semibold);
   }
 
   .hero__note {
