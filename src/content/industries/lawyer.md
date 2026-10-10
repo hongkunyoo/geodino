@@ -88,9 +88,6 @@ example:
   title: 완성된 공식 안내 페이지 예시
   lead: 가상의 분당 법률사무소를 기준으로 만든 예시입니다. "AI가 읽는 부분 보기"를 켜면 각 부분을 왜 이렇게 정리했는지 함께 볼 수 있습니다.
   href: https://law-demo.geodino.io/
-  extras:
-    - label: 정리 전·후 비교
-      href: https://law-demo.geodino.io/before-after/
 
 finalCta:
   title: 우리 사무소가 AI에게 어떻게 소개되는지 확인해 보세요
