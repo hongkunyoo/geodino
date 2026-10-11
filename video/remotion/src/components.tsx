@@ -289,10 +289,14 @@ export const EndCard: React.FC<{ tagline?: string }> = ({ tagline }) => {
         {tagline && (
           <div style={{ fontSize: 40, fontWeight: 700, color: color.green700, ...appear(8) }}>{tagline}</div>
         )}
-        <div style={{ fontSize: 58, fontWeight: 800, lineHeight: 1.3, letterSpacing: "-0.02em", ...appear(12) }}>
-          우리 비즈니스가 AI에게
+        {/* 메인 히어로 H1과 같은 문장 (2026-10-11 운영자 결정) */}
+        <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.25, letterSpacing: "-0.02em", ...appear(12) }}>
+          <Green>우리 비즈니스</Green>,
           <br />
-          어떻게 보이는지 확인해 보세요
+          AI가 추천해 주나요?
+        </div>
+        <div style={{ fontSize: 40, fontWeight: 700, color: color.inkMuted, ...appear(17) }}>
+          무료 진단으로 먼저 확인해 보세요
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 28, ...appear(22) }}>
           <span

@@ -20,7 +20,7 @@ export interface ProcessStep extends TitledText {
  */
 export const hero = {
   eyebrow: '변호사·세무사·학원·인테리어 사장님을 위한',
-  titleLines: ['손님이 AI에게 추천을 물을 때,', '우리 비즈니스가 나오나요?'],
+  titleLines: ['우리 비즈니스,', 'AI가 추천해 주나요?'],
   highlight: '우리 비즈니스',
   lead: 'AI가 한입에 이해하도록, GeoDino가 요리해 드립니다.',
   note: '이메일만 남기면, 5개 AI에 직접 물어본 결과를 한 장으로 보내 드립니다. 진단은 무료, 정리 작업도 처음 3개월 무료입니다.',
@@ -55,7 +55,7 @@ export const introVideo = {
   src: '/video/geodino-intro.mp4',
   poster: '/video/geodino-intro-poster.jpg',
   /** 구조화 데이터(VideoObject)용 */
-  name: 'GeoDino 30초 소개 — 손님이 AI에게 물을 때 우리 비즈니스가 나오나요?',
+  name: 'GeoDino 30초 소개 — 우리 비즈니스, AI가 추천해 주나요?',
   description:
     '손님이 AI에게 세무사 추천을 물었는데 우리 사무소가 답변에 없는 예시로, AI가 웹에 정리된 정보로 답을 만든다는 점과 GeoDino의 진단·정리·다시 확인 과정을 30초로 소개합니다.',
   uploadDate: '2026-10-07',
