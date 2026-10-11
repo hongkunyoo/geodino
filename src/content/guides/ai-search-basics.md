@@ -3,7 +3,7 @@ order: 1
 title: AI 검색은 어떻게 우리 비즈니스를 소개할까
 description: '손님이 AI에게 "우리 동네 잘하는 곳"을 물으면 AI는 어디서 답을 가져올까요? AI 검색의 원리와 소개되는 조건을 정리했습니다.'
 publishedAt: 2026-10-06
-updatedAt: 2026-10-07
+updatedAt: 2026-10-11
 faqs:
   - question: AI 서비스마다 답이 다른가요?
     answer:
@@ -29,7 +29,7 @@ AI 검색 서비스는 대체로 이런 순서로 답을 만듭니다.
 
 ### 1. 찾기 쉬워야 합니다
 
-웹페이지마다 눈에 보이지 않는 이름표가 있습니다. 페이지 제목, 설명, 비즈니스 정보 같은 이름표가 제대로 달려 있어야 검색엔진과 AI가 쉽게 찾아옵니다.
+웹페이지마다 눈에 보이지 않는 이름표가 있습니다. 페이지 제목, 설명, 비즈니스 정보 같은 이름표가 잘 달려 있으면 검색엔진과 AI가 우리 페이지를 찾고 이해하는 데 도움이 됩니다.
 
 이름표 말고도 흔히 막히는 부분이 있습니다.
 
@@ -42,6 +42,8 @@ AI 검색 서비스는 대체로 이런 순서로 답을 만듭니다.
 AI는 손님의 질문에 바로 답이 되는 문장을 찾습니다. 손님이 "상담 비용은 얼마예요?"라고 물었을 때, 우리 페이지에 비용을 정하는 기준이나 상담 방식이 분명하게 적혀 있다면 그 내용이 답에 쓰이기 쉽습니다.
 
 반대로 "최선을 다하겠습니다", "고객 만족을 위해 노력합니다" 같은 문장은 좋은 말이지만 손님 질문에 대한 답이 되지 못합니다. **무엇을 하는지, 어디서 하는지, 어떻게 진행하는지, 비용은 어떤 기준인지**처럼 구체적인 정보가 답으로 쓰입니다.
+
+손님 질문과 그 답을 짝지어 정리한 FAQ는 이런 정보를 담기 좋은 형식입니다. [FAQ를 잘 쓰는 법](/guides/faq-for-ai-search/)에 자세히 정리했습니다.
 
 ### 3. 믿을 수 있어야 합니다
 
@@ -73,5 +75,9 @@ AI는 여러 곳에서 같은 정보를 확인할수록 그 정보를 믿고 쓰
 
 ## 참고한 공식 자료
 
-- Google: [AI 기능과 웹사이트 (AI 개요 등 구글 검색의 AI 기능이 웹페이지를 다루는 방식)](https://developers.google.com/search/docs/appearance/ai-features)
+AI 서비스마다 답을 만드는 방식이 다르고 공식 안내도 회사마다 조금씩 다릅니다. 이 글은 여러 회사가 같은 방향으로 안내하는 내용을 중심으로 정리했습니다 (2026년 10월 확인).
+
+- Google: [AI 기능과 웹사이트 (AI 개요 등 구글 검색의 AI 기능이 웹페이지를 다루는 방식)](https://developers.google.com/search/docs/appearance/ai-features), [생성형 AI 검색을 위한 웹사이트 최적화 가이드](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
+- Microsoft (Bing·Copilot): [AI 검색 답변에 포함되도록 콘텐츠 최적화하기 (2025)](https://about.ads.microsoft.com/en/blog/post/october-2025/optimizing-your-content-for-inclusion-in-ai-search-answers)
+- OpenAI (ChatGPT): [게시자·개발자 FAQ (ChatGPT 검색)](https://help.openai.com/en/articles/12627856-publishers-and-developers-faq)
 - AI 수집 프로그램별 공식 안내는 [robots.txt 가이드의 참고 자료](/guides/robots-txt/)에 모아 두었습니다.

@@ -3,7 +3,9 @@ import GuideCard from '@/components/GuideCard.astro';
 import SectionHeader from '@/components/SectionHeader.astro';
 import { getGuides } from '@/data/guides';
 
-const guides = (await getGuides()).slice(0, 3);
+/** 데스크톱 2열 기준으로 2×2가 맞도록 4편까지 보여 준다. 더 많으면 "가이드 전체 보기"로 넘긴다 */
+const MAX_GUIDES = 4;
+const guides = (await getGuides()).slice(0, MAX_GUIDES);
 ---
 
 {
